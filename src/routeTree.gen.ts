@@ -19,6 +19,10 @@ import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as ProgrammesRouteImport } from './routes/programmes'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DashboardAttendanceRouteImport } from './routes/dashboard/attendance'
+import { Route as DashboardCommunityRouteImport } from './routes/dashboard/community'
+import { Route as DashboardEventsRouteImport } from './routes/dashboard/events'
+import { Route as DashboardOpportunitiesRouteImport } from './routes/dashboard/opportunities'
 import { Route as DashboardProfileRouteImport } from './routes/dashboard/profile'
 import { Route as DashboardSecurityRouteImport } from './routes/dashboard/security'
 
@@ -72,6 +76,26 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardAttendanceRoute = DashboardAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCommunityRoute = DashboardCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardEventsRoute = DashboardEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardOpportunitiesRoute = DashboardOpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardProfileRoute = DashboardProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -93,6 +117,10 @@ export interface FileRoutesByFullPath {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/dashboard/attendance': typeof DashboardAttendanceRoute
+  '/dashboard/community': typeof DashboardCommunityRoute
+  '/dashboard/events': typeof DashboardEventsRoute
+  '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -106,6 +134,10 @@ export interface FileRoutesByTo {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/dashboard/attendance': typeof DashboardAttendanceRoute
+  '/dashboard/community': typeof DashboardCommunityRoute
+  '/dashboard/events': typeof DashboardEventsRoute
+  '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
   '/dashboard': typeof DashboardIndexRoute
@@ -121,6 +153,10 @@ export interface FileRoutesById {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/dashboard/attendance': typeof DashboardAttendanceRoute
+  '/dashboard/community': typeof DashboardCommunityRoute
+  '/dashboard/events': typeof DashboardEventsRoute
+  '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -137,6 +173,10 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/dashboard/attendance'
+    | '/dashboard/community'
+    | '/dashboard/events'
+    | '/dashboard/opportunities'
     | '/dashboard/profile'
     | '/dashboard/security'
     | '/dashboard/'
@@ -150,6 +190,10 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/dashboard/attendance'
+    | '/dashboard/community'
+    | '/dashboard/events'
+    | '/dashboard/opportunities'
     | '/dashboard/profile'
     | '/dashboard/security'
     | '/dashboard'
@@ -164,6 +208,10 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/dashboard/attendance'
+    | '/dashboard/community'
+    | '/dashboard/events'
+    | '/dashboard/opportunities'
     | '/dashboard/profile'
     | '/dashboard/security'
     | '/dashboard/'
@@ -253,6 +301,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/attendance': {
+      id: '/dashboard/attendance'
+      path: '/attendance'
+      fullPath: '/dashboard/attendance'
+      preLoaderRoute: typeof DashboardAttendanceRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/community': {
+      id: '/dashboard/community'
+      path: '/community'
+      fullPath: '/dashboard/community'
+      preLoaderRoute: typeof DashboardCommunityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/events': {
+      id: '/dashboard/events'
+      path: '/events'
+      fullPath: '/dashboard/events'
+      preLoaderRoute: typeof DashboardEventsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/opportunities': {
+      id: '/dashboard/opportunities'
+      path: '/opportunities'
+      fullPath: '/dashboard/opportunities'
+      preLoaderRoute: typeof DashboardOpportunitiesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/profile': {
       id: '/dashboard/profile'
       path: '/profile'
@@ -271,12 +347,20 @@ declare module '@tanstack/react-router' {
 }
 
 interface DashboardRouteChildren {
+  DashboardAttendanceRoute: typeof DashboardAttendanceRoute
+  DashboardCommunityRoute: typeof DashboardCommunityRoute
+  DashboardEventsRoute: typeof DashboardEventsRoute
+  DashboardOpportunitiesRoute: typeof DashboardOpportunitiesRoute
   DashboardProfileRoute: typeof DashboardProfileRoute
   DashboardSecurityRoute: typeof DashboardSecurityRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAttendanceRoute: DashboardAttendanceRoute,
+  DashboardCommunityRoute: DashboardCommunityRoute,
+  DashboardEventsRoute: DashboardEventsRoute,
+  DashboardOpportunitiesRoute: DashboardOpportunitiesRoute,
   DashboardProfileRoute: DashboardProfileRoute,
   DashboardSecurityRoute: DashboardSecurityRoute,
   DashboardIndexRoute: DashboardIndexRoute,
