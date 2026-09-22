@@ -26,7 +26,7 @@ function SecurityPage() {
       toast.error("Use at least 8 characters.");
       return;
     }
-    if (password.toLowerCase() === "scaui") {
+    if (password.toLowerCase() === "@scaui") {
       toast.error("Please choose a password different from the first-time one.");
       return;
     }
@@ -60,7 +60,7 @@ function SecurityPage() {
       {mustChange && (
         <p className="mt-3 rounded-lg bg-accent/60 p-3 text-sm text-accent-foreground">
           You signed in with the shared first-time password. Choose a private password before you
-          continue — everything else unlocks after this.
+          continue, everything else unlocks after this.
         </p>
       )}
 

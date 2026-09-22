@@ -19,7 +19,7 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "She Code Africa — UI Chapter | Learn, build, belong" },
+      { title: "She Code Africa UI Chapter | Learn, build, belong" },
       {
         name: "description",
         content:
@@ -113,7 +113,7 @@ function Index() {
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
               SCAUI is where UI students turn curiosity about tech into skills, portfolios and
-              opportunities — with a community that shows up for each other.
+              opportunities with a community that shows up for each other.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
@@ -334,7 +334,7 @@ function Index() {
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-ink-muted">
             Every member gets a personal page: profile, tracks, event history, attendance count,
-            projects and achievements — all in one place.
+            projects and achievements all in one place.
           </p>
           <div className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -363,7 +363,7 @@ function Index() {
             </Button>
           </div>
           <p className="mt-5 text-xs text-ink-muted">
-            First time signing in? Use your membership email and the password <strong>scaui</strong>.
+            First time signing in? Use your membership email and the password <strong>@scaui</strong>.
           </p>
         </div>
       </section>

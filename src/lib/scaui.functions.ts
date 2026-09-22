@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
-const FIRST_TIME_PASSWORD = "scaui";
+const FIRST_TIME_PASSWORD = "@scaui";
 
 interface ActivateInput {
   email: string;
@@ -25,7 +25,7 @@ export const activateAccount = createServerFn({ method: "POST" })
     if (data.password !== FIRST_TIME_PASSWORD) {
       return {
         ok: false as const,
-        error: "That is not the first-time password. Use scaui to activate your account.",
+        error: "That is not the first-time password. Use @scaui to activate your account.",
       };
     }
 

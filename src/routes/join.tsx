@@ -67,7 +67,7 @@ function JoinPage() {
       <PageHero
         eyebrow="Membership"
         title="Join She Code Africa, UI Chapter"
-        description="Tell us a little about yourself. Once you're on the list you can activate your member page with the first-time password scaui."
+        description="Tell us a little about yourself. Once you're on the list you can activate your member page with the first-time password @scaui."
       />
 
       <div className="mx-auto max-w-2xl px-5 py-16">
@@ -76,7 +76,7 @@ function JoinPage() {
             <h2 className="font-display text-2xl font-extrabold">You're on the list 🎉</h2>
             <p className="mt-3 text-muted-foreground">
               Activate your member page now using your email and the first-time password{" "}
-              <strong>scaui</strong>.
+              <strong>@scaui</strong>.
             </p>
             <Button asChild className="mt-6">
               <Link to="/auth">Activate my account</Link>

@@ -65,7 +65,7 @@ function AuthPage() {
     }
     const { error } = await supabase.auth.signInWithPassword({
       email: cleanEmail,
-      password: "scaui",
+      password: "@scaui",
     });
     setBusy(false);
     if (error) {
@@ -123,7 +123,7 @@ function AuthPage() {
             <form onSubmit={activate} className="mt-6 space-y-4 rounded-2xl border border-border bg-card p-6">
               <p className="rounded-lg bg-accent/60 p-3 text-sm text-accent-foreground">
                 Already on the SCAUI member list? Enter your membership email and the first-time
-                password <strong>scaui</strong>. You'll set your own password right after.
+                password <strong>@scaui</strong>. You'll set your own password right after.
               </p>
               <div className="space-y-2">
                 <Label htmlFor="ac-email">Membership email</Label>
@@ -144,7 +144,7 @@ function AuthPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="scaui"
+                  placeholder="@scaui"
                 />
               </div>
               <Button type="submit" className="w-full" disabled={busy}>
