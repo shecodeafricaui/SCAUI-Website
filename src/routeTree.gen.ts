@@ -10,33 +10,223 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as EventsRouteImport } from './routes/events'
+import { Route as JoinRouteImport } from './routes/join'
+import { Route as OpportunitiesRouteImport } from './routes/opportunities'
+import { Route as ProgrammesRouteImport } from './routes/programmes'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DashboardAttendanceRouteImport } from './routes/dashboard/attendance'
+import { Route as DashboardCommunityRouteImport } from './routes/dashboard/community'
+import { Route as DashboardEventsRouteImport } from './routes/dashboard/events'
+import { Route as DashboardOpportunitiesRouteImport } from './routes/dashboard/opportunities'
+import { Route as DashboardProfileRouteImport } from './routes/dashboard/profile'
+import { Route as DashboardSecurityRouteImport } from './routes/dashboard/security'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JoinRoute = JoinRouteImport.update({
+  id: '/join',
+  path: '/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpportunitiesRoute = OpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgrammesRoute = ProgrammesRouteImport.update({
+  id: '/programmes',
+  path: '/programmes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAttendanceRoute = DashboardAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCommunityRoute = DashboardCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardEventsRoute = DashboardEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardOpportunitiesRoute = DashboardOpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardProfileRoute = DashboardProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSecurityRoute = DashboardSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/events': typeof EventsRoute
+  '/join': typeof JoinRoute
+  '/opportunities': typeof OpportunitiesRoute
+  '/programmes': typeof ProgrammesRoute
+  '/projects': typeof ProjectsRoute
+  '/dashboard/attendance': typeof DashboardAttendanceRoute
+  '/dashboard/community': typeof DashboardCommunityRoute
+  '/dashboard/events': typeof DashboardEventsRoute
+  '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/events': typeof EventsRoute
+  '/join': typeof JoinRoute
+  '/opportunities': typeof OpportunitiesRoute
+  '/programmes': typeof ProgrammesRoute
+  '/projects': typeof ProjectsRoute
+  '/dashboard/attendance': typeof DashboardAttendanceRoute
+  '/dashboard/community': typeof DashboardCommunityRoute
+  '/dashboard/events': typeof DashboardEventsRoute
+  '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/events': typeof EventsRoute
+  '/join': typeof JoinRoute
+  '/opportunities': typeof OpportunitiesRoute
+  '/programmes': typeof ProgrammesRoute
+  '/projects': typeof ProjectsRoute
+  '/dashboard/attendance': typeof DashboardAttendanceRoute
+  '/dashboard/community': typeof DashboardCommunityRoute
+  '/dashboard/events': typeof DashboardEventsRoute
+  '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/contact'
+    | '/dashboard'
+    | '/events'
+    | '/join'
+    | '/opportunities'
+    | '/programmes'
+    | '/projects'
+    | '/dashboard/attendance'
+    | '/dashboard/community'
+    | '/dashboard/events'
+    | '/dashboard/opportunities'
+    | '/dashboard/profile'
+    | '/dashboard/security'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/contact'
+    | '/events'
+    | '/join'
+    | '/opportunities'
+    | '/programmes'
+    | '/projects'
+    | '/dashboard/attendance'
+    | '/dashboard/community'
+    | '/dashboard/events'
+    | '/dashboard/opportunities'
+    | '/dashboard/profile'
+    | '/dashboard/security'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/contact'
+    | '/dashboard'
+    | '/events'
+    | '/join'
+    | '/opportunities'
+    | '/programmes'
+    | '/projects'
+    | '/dashboard/attendance'
+    | '/dashboard/community'
+    | '/dashboard/events'
+    | '/dashboard/opportunities'
+    | '/dashboard/profile'
+    | '/dashboard/security'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  ContactRoute: typeof ContactRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
+  EventsRoute: typeof EventsRoute
+  JoinRoute: typeof JoinRoute
+  OpportunitiesRoute: typeof OpportunitiesRoute
+  ProgrammesRoute: typeof ProgrammesRoute
+  ProjectsRoute: typeof ProjectsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +238,148 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/join': {
+      id: '/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof JoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/opportunities': {
+      id: '/opportunities'
+      path: '/opportunities'
+      fullPath: '/opportunities'
+      preLoaderRoute: typeof OpportunitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programmes': {
+      id: '/programmes'
+      path: '/programmes'
+      fullPath: '/programmes'
+      preLoaderRoute: typeof ProgrammesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/attendance': {
+      id: '/dashboard/attendance'
+      path: '/attendance'
+      fullPath: '/dashboard/attendance'
+      preLoaderRoute: typeof DashboardAttendanceRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/community': {
+      id: '/dashboard/community'
+      path: '/community'
+      fullPath: '/dashboard/community'
+      preLoaderRoute: typeof DashboardCommunityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/events': {
+      id: '/dashboard/events'
+      path: '/events'
+      fullPath: '/dashboard/events'
+      preLoaderRoute: typeof DashboardEventsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/opportunities': {
+      id: '/dashboard/opportunities'
+      path: '/opportunities'
+      fullPath: '/dashboard/opportunities'
+      preLoaderRoute: typeof DashboardOpportunitiesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/profile': {
+      id: '/dashboard/profile'
+      path: '/profile'
+      fullPath: '/dashboard/profile'
+      preLoaderRoute: typeof DashboardProfileRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/security': {
+      id: '/dashboard/security'
+      path: '/security'
+      fullPath: '/dashboard/security'
+      preLoaderRoute: typeof DashboardSecurityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardAttendanceRoute: typeof DashboardAttendanceRoute
+  DashboardCommunityRoute: typeof DashboardCommunityRoute
+  DashboardEventsRoute: typeof DashboardEventsRoute
+  DashboardOpportunitiesRoute: typeof DashboardOpportunitiesRoute
+  DashboardProfileRoute: typeof DashboardProfileRoute
+  DashboardSecurityRoute: typeof DashboardSecurityRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAttendanceRoute: DashboardAttendanceRoute,
+  DashboardCommunityRoute: DashboardCommunityRoute,
+  DashboardEventsRoute: DashboardEventsRoute,
+  DashboardOpportunitiesRoute: DashboardOpportunitiesRoute,
+  DashboardProfileRoute: DashboardProfileRoute,
+  DashboardSecurityRoute: DashboardSecurityRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  ContactRoute: ContactRoute,
+  DashboardRoute: DashboardRouteWithChildren,
+  EventsRoute: EventsRoute,
+  JoinRoute: JoinRoute,
+  OpportunitiesRoute: OpportunitiesRoute,
+  ProgrammesRoute: ProgrammesRoute,
+  ProjectsRoute: ProjectsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
