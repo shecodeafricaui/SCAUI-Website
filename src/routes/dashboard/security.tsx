@@ -14,6 +14,7 @@ export const Route = createFileRoute("/dashboard/security")({
 function SecurityPage() {
   const { profile, refresh, user } = useAuth();
   const navigate = useNavigate();
+  const [currentPassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [busy, setBusy] = useState(false);
@@ -22,6 +23,10 @@ function SecurityPage() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!currentPassword) {
+      toast.error(mustChange ? "Enter the first-time password (@scaui)." : "Enter your current password.");
+      return;
+    }
     if (password.length < 8) {
       toast.error("Use at least 8 characters.");
       return;
@@ -35,7 +40,7 @@ function SecurityPage() {
       return;
     }
     setBusy(true);
-    const { error } = await supabase.auth.updateUser({ password });
+    const { error } = await supabase.auth.updateUser({ password, current_password: currentPassword });
     if (error) {
       setBusy(false);
       toast.error(error.message);
@@ -46,6 +51,7 @@ function SecurityPage() {
     }
     await refresh();
     setBusy(false);
+    setCurrentPassword("");
     setPassword("");
     setConfirm("");
     toast.success("Password updated.");
@@ -60,11 +66,22 @@ function SecurityPage() {
       {mustChange && (
         <p className="mt-3 rounded-lg bg-accent/60 p-3 text-sm text-accent-foreground">
           You signed in with the shared first-time password. Choose a private password before you
-          continue, everything else unlocks after this.
+          continue — everything else unlocks after this.
         </p>
       )}
 
       <form onSubmit={submit} className="mt-6 space-y-4 rounded-2xl border border-border bg-card p-6">
+        <div className="space-y-2">
+          <Label htmlFor="pw-current">{mustChange ? "First-time password" : "Current password"}</Label>
+          <Input
+            id="pw-current"
+            type="password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            placeholder={mustChange ? "@scaui" : undefined}
+            required
+          />
+        </div>
         <div className="space-y-2">
           <Label htmlFor="pw">New password</Label>
           <Input id="pw" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
