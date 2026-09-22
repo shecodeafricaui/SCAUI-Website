@@ -22,7 +22,7 @@ export const Route = createFileRoute("/auth")({
       { property: "og:description", content: "Access your SCAUI member dashboard." },
     ],
   }),
-  component: AuthPage;
+  component: AuthPage,
 });
 
 function AuthPage() {
