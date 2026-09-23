@@ -25,6 +25,7 @@ import { Route as DashboardEventsRouteImport } from './routes/dashboard/events'
 import { Route as DashboardOpportunitiesRouteImport } from './routes/dashboard/opportunities'
 import { Route as DashboardProfileRouteImport } from './routes/dashboard/profile'
 import { Route as DashboardSecurityRouteImport } from './routes/dashboard/security'
+import { Route as DashboardWorkRouteImport } from './routes/dashboard/work'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -106,6 +107,11 @@ const DashboardSecurityRoute = DashboardSecurityRouteImport.update({
   path: '/security',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardWorkRoute = DashboardWorkRouteImport.update({
+  id: '/work',
+  path: '/work',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/work': typeof DashboardWorkRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/work': typeof DashboardWorkRoute
   '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/work': typeof DashboardWorkRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/dashboard/opportunities'
     | '/dashboard/profile'
     | '/dashboard/security'
+    | '/dashboard/work'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -196,6 +206,7 @@ export interface FileRouteTypes {
     | '/dashboard/opportunities'
     | '/dashboard/profile'
     | '/dashboard/security'
+    | '/dashboard/work'
     | '/dashboard'
   id:
     | '__root__'
@@ -214,6 +225,7 @@ export interface FileRouteTypes {
     | '/dashboard/opportunities'
     | '/dashboard/profile'
     | '/dashboard/security'
+    | '/dashboard/work'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -343,6 +355,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSecurityRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/work': {
+      id: '/dashboard/work'
+      path: '/work'
+      fullPath: '/dashboard/work'
+      preLoaderRoute: typeof DashboardWorkRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
@@ -353,6 +372,7 @@ interface DashboardRouteChildren {
   DashboardOpportunitiesRoute: typeof DashboardOpportunitiesRoute
   DashboardProfileRoute: typeof DashboardProfileRoute
   DashboardSecurityRoute: typeof DashboardSecurityRoute
+  DashboardWorkRoute: typeof DashboardWorkRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
@@ -363,6 +383,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardOpportunitiesRoute: DashboardOpportunitiesRoute,
   DashboardProfileRoute: DashboardProfileRoute,
   DashboardSecurityRoute: DashboardSecurityRoute,
+  DashboardWorkRoute: DashboardWorkRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
