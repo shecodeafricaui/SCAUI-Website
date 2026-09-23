@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { NewsletterForm } from "@/components/newsletter-form";
+import { BrandMark } from "@/components/brand-mark";
 
 export function SiteFooter() {
   return (
@@ -7,9 +8,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.4fr]">
         <div>
           <div className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary font-display text-sm font-black text-primary-foreground">
-              SC
-            </span>
+            <BrandMark className="h-11 w-11 bg-white p-0.5" />
             <span className="font-display text-base font-extrabold">She Code Africa</span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">

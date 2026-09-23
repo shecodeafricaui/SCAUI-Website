@@ -281,8 +281,51 @@ export type Database = {
         }
         Relationships: []
       }
+      member_projects: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          is_public: boolean
+          project_url: string | null
+          repo_url: string | null
+          role: string | null
+          tech_stack: string[]
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_public?: boolean
+          project_url?: string | null
+          repo_url?: string | null
+          role?: string | null
+          tech_stack?: string[]
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_public?: boolean
+          project_url?: string | null
+          repo_url?: string | null
+          role?: string | null
+          tech_stack?: string[]
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       member_records: {
         Row: {
+          approval_status: string
           birthday: string | null
           claimed: boolean
           claimed_at: string | null
@@ -299,9 +342,13 @@ export type Database = {
           level: string | null
           phone: string | null
           preferred_team: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          source: string
           willing_to_volunteer: boolean
         }
         Insert: {
+          approval_status?: string
           birthday?: string | null
           claimed?: boolean
           claimed_at?: string | null
@@ -318,9 +365,13 @@ export type Database = {
           level?: string | null
           phone?: string | null
           preferred_team?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          source?: string
           willing_to_volunteer?: boolean
         }
         Update: {
+          approval_status?: string
           birthday?: string | null
           claimed?: boolean
           claimed_at?: string | null
@@ -337,6 +388,9 @@ export type Database = {
           level?: string | null
           phone?: string | null
           preferred_team?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          source?: string
           willing_to_volunteer?: boolean
         }
         Relationships: []
@@ -562,6 +616,7 @@ export type Database = {
       profiles: {
         Row: {
           avatar_url: string | null
+          behance_url: string | null
           bio: string | null
           birthday: string | null
           birthday_visible: boolean
@@ -573,17 +628,22 @@ export type Database = {
           faculty: string | null
           full_name: string
           gender: string | null
+          github_url: string | null
           id: string
           interests: string[]
           level: string | null
+          linkedin_url: string | null
           must_change_password: boolean
           phone: string | null
+          portfolio_url: string | null
           status: string
+          twitter_url: string | null
           updated_at: string
           willing_to_volunteer: boolean
         }
         Insert: {
           avatar_url?: string | null
+          behance_url?: string | null
           bio?: string | null
           birthday?: string | null
           birthday_visible?: boolean
@@ -595,17 +655,22 @@ export type Database = {
           faculty?: string | null
           full_name?: string
           gender?: string | null
+          github_url?: string | null
           id: string
           interests?: string[]
           level?: string | null
+          linkedin_url?: string | null
           must_change_password?: boolean
           phone?: string | null
+          portfolio_url?: string | null
           status?: string
+          twitter_url?: string | null
           updated_at?: string
           willing_to_volunteer?: boolean
         }
         Update: {
           avatar_url?: string | null
+          behance_url?: string | null
           bio?: string | null
           birthday?: string | null
           birthday_visible?: boolean
@@ -617,12 +682,16 @@ export type Database = {
           faculty?: string | null
           full_name?: string
           gender?: string | null
+          github_url?: string | null
           id?: string
           interests?: string[]
           level?: string | null
+          linkedin_url?: string | null
           must_change_password?: boolean
           phone?: string | null
+          portfolio_url?: string | null
           status?: string
+          twitter_url?: string | null
           updated_at?: string
           willing_to_volunteer?: boolean
         }
@@ -947,6 +1016,7 @@ export type Database = {
           lead_id: string | null
           name: string
           open_positions: number
+          whatsapp_url: string | null
         }
         Insert: {
           created_at?: string
@@ -956,6 +1026,7 @@ export type Database = {
           lead_id?: string | null
           name: string
           open_positions?: number
+          whatsapp_url?: string | null
         }
         Update: {
           created_at?: string
@@ -965,6 +1036,7 @@ export type Database = {
           lead_id?: string | null
           name?: string
           open_positions?: number
+          whatsapp_url?: string | null
         }
         Relationships: []
       }

@@ -23,6 +23,11 @@ export interface Profile {
   status: string;
   must_change_password: boolean;
   birthday_visible: boolean;
+  portfolio_url: string | null;
+  linkedin_url: string | null;
+  github_url: string | null;
+  behance_url: string | null;
+  twitter_url: string | null;
 }
 
 interface AuthValue {

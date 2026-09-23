@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
+import { BrandMark } from "@/components/brand-mark";
 
 const NAV = [
   { to: "/programmes", label: "Programmes" },
@@ -21,9 +22,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
         <Link to="/" className="flex items-center gap-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary font-display text-sm font-black text-primary-foreground">
-            SC
-          </span>
+          <BrandMark className="h-10 w-10" />
           <span className="leading-tight">
             <span className="block font-display text-base font-extrabold tracking-tight">
               She Code Africa

@@ -10,10 +10,12 @@ import {
   UserRound,
   Users,
   ShieldCheck,
+  Briefcase,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { BrandMark } from "@/components/brand-mark";
 
 export const Route = createFileRoute("/dashboard")({
   component: DashboardLayout,
@@ -22,6 +24,7 @@ export const Route = createFileRoute("/dashboard")({
 const LINKS = [
   { to: "/dashboard", label: "Overview", icon: Gauge, exact: true },
   { to: "/dashboard/profile", label: "My profile", icon: UserRound },
+  { to: "/dashboard/work", label: "My work", icon: Briefcase },
   { to: "/dashboard/events", label: "Events", icon: CalendarCheck },
   { to: "/dashboard/attendance", label: "Attendance", icon: LayoutGrid },
   { to: "/dashboard/community", label: "Tracks & teams", icon: Users },
@@ -56,9 +59,7 @@ function DashboardLayout() {
     <div className="flex min-h-screen bg-background">
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col bg-sidebar p-5 text-sidebar-foreground lg:flex">
         <Link to="/" className="flex items-center gap-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary font-display text-sm font-black text-primary-foreground">
-            SC
-          </span>
+          <BrandMark className="h-10 w-10 bg-white p-0.5" />
           <span className="font-display text-sm font-extrabold">SCAUI Portal</span>
         </Link>
 

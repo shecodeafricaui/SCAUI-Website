@@ -8,6 +8,13 @@
       "when": 1790064197689,
       "tag": "0000_scaui_core_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790124013454,
+      "tag": "0001_member_links_projects_approval",
+      "breakpoints": true
     }
   ]
 }
