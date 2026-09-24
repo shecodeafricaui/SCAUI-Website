@@ -65,8 +65,9 @@ function DashboardHome() {
               <Badge key={r} className="capitalize">{r.replace("_", " ")}</Badge>
             ))}
             {(data?.tracks ?? []).map((t) => (
-              // @ts-expect-error nested select typing
-              <Badge key={t.track_id} variant="outline" className="border-white/25 text-ink-foreground">{t.tracks?.name}</Badge>
+              <Badge key={t.track_id} variant="outline" className="border-white/25 text-ink-foreground">
+                {(t as { tracks?: { name?: string } }).tracks?.name}
+              </Badge>
             ))}
           </div>
         </div>
