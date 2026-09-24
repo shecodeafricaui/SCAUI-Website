@@ -49,6 +49,19 @@ export const activateAccount = createServerFn({ method: "POST" })
         error: "This account is already active. Sign in with your own password.",
       };
     }
+    if (record.approval_status === "rejected") {
+      return {
+        ok: false as const,
+        error: "Your membership application was not approved. Please contact the chapter team.",
+      };
+    }
+    if (record.approval_status !== "approved") {
+      return {
+        ok: false as const,
+        error:
+          "Your membership is still awaiting approval from the chapter team. We'll email you once you're approved.",
+      };
+    }
 
     const { data: created, error: createError } = await supabaseAdmin.auth.admin.createUser({
       email: data.email,
@@ -166,6 +179,8 @@ export const joinScaui = createServerFn({ method: "POST" })
       expectations: data.expectations ?? null,
       willing_to_volunteer: data.willing_to_volunteer ?? false,
       preferred_team: data.preferred_team ?? null,
+      approval_status: "pending",
+      source: "website",
     });
 
     if (error) return { ok: false as const, error: "Something went wrong. Please try again." };
@@ -257,4 +272,56 @@ export const importMembers = createServerFn({ method: "POST" })
     if (error) return { ok: false as const, error: error.message, imported: 0 };
 
     return { ok: true as const, imported: rows.length };
+  });
+
+interface ReviewInput {
+  record_id: string;
+  decision: "approved" | "rejected";
+}
+
+/** Admins approve or reject new membership applications. */
+export const reviewMemberApplication = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: ReviewInput) => data)
+  .handler(async ({ data, context }) => {
+    const { data: isStaff } = await context.supabase.rpc("is_staff", { _user_id: context.userId });
+    if (!isStaff) return { ok: false as const, error: "Only admins can review applications." };
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const { error } = await supabaseAdmin
+      .from("member_records")
+      .update({
+        approval_status: data.decision,
+        reviewed_at: new Date().toISOString(),
+        reviewed_by: context.userId,
+      })
+      .eq("id", data.record_id);
+
+    if (error) return { ok: false as const, error: error.message };
+
+    await supabaseAdmin.from("audit_logs").insert({
+      actor_id: context.userId,
+      action: `member.${data.decision}`,
+      entity: "member_records",
+      entity_id: data.record_id,
+      details: {},
+    });
+
+    return { ok: true as const };
+  });
+
+/** Admin view of the full member roster (roster table is staff-read only). */
+export const listMemberRecords = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data: isStaff } = await context.supabase.rpc("is_staff", { _user_id: context.userId });
+    if (!isStaff) return { ok: false as const, records: [] };
+
+    const { data } = await context.supabase
+      .from("member_records")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    return { ok: true as const, records: data ?? [] };
   });

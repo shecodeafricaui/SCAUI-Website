@@ -165,6 +165,18 @@ function CommunityPage() {
                     Volunteer
                   </Button>
                 )}
+                {(member || applied) &&
+                  (t.whatsapp_url ? (
+                    <Button asChild size="sm" variant="outline" className="mt-2 w-full">
+                      <a href={t.whatsapp_url} target="_blank" rel="noopener noreferrer">
+                        Join the WhatsApp group
+                      </a>
+                    </Button>
+                  ) : (
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      The WhatsApp group link will appear here once the team lead adds it.
+                    </p>
+                  ))}
               </div>
             );
           })}

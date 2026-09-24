@@ -92,8 +92,7 @@ function AttendancePage() {
             <div key={c.id} className="flex items-center gap-3 rounded-xl bg-accent/60 p-4">
               <Award className="h-5 w-5 text-primary" />
               <p className="text-sm font-semibold">
-                {/* @ts-expect-error nested select typing */}
-                Completed {c.programmes?.title}
+                Completed {(c as { programmes?: { title?: string } }).programmes?.title}
               </p>
             </div>
           ))}

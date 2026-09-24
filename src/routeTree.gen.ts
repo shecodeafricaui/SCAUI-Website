@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -18,6 +19,10 @@ import { Route as JoinRouteImport } from './routes/join'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as ProgrammesRouteImport } from './routes/programmes'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminEventsRouteImport } from './routes/admin/events'
+import { Route as AdminInboxRouteImport } from './routes/admin/inbox'
+import { Route as AdminMembersRouteImport } from './routes/admin/members'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardAttendanceRouteImport } from './routes/dashboard/attendance'
 import { Route as DashboardCommunityRouteImport } from './routes/dashboard/community'
@@ -30,6 +35,11 @@ import { Route as DashboardWorkRouteImport } from './routes/dashboard/work'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -71,6 +81,26 @@ const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEventsRoute = AdminEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminInboxRoute = AdminInboxRouteImport.update({
+  id: '/inbox',
+  path: '/inbox',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMembersRoute = AdminMembersRouteImport.update({
+  id: '/members',
+  path: '/members',
+  getParentRoute: () => AdminRoute,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
@@ -115,6 +145,7 @@ const DashboardWorkRoute = DashboardWorkRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
@@ -123,6 +154,9 @@ export interface FileRoutesByFullPath {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/inbox': typeof AdminInboxRoute
+  '/admin/members': typeof AdminMembersRoute
   '/dashboard/attendance': typeof DashboardAttendanceRoute
   '/dashboard/community': typeof DashboardCommunityRoute
   '/dashboard/events': typeof DashboardEventsRoute
@@ -130,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
   '/dashboard/work': typeof DashboardWorkRoute
+  '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
@@ -141,6 +176,9 @@ export interface FileRoutesByTo {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/inbox': typeof AdminInboxRoute
+  '/admin/members': typeof AdminMembersRoute
   '/dashboard/attendance': typeof DashboardAttendanceRoute
   '/dashboard/community': typeof DashboardCommunityRoute
   '/dashboard/events': typeof DashboardEventsRoute
@@ -148,11 +186,13 @@ export interface FileRoutesByTo {
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
   '/dashboard/work': typeof DashboardWorkRoute
+  '/admin': typeof AdminIndexRoute
   '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
@@ -161,6 +201,9 @@ export interface FileRoutesById {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/inbox': typeof AdminInboxRoute
+  '/admin/members': typeof AdminMembersRoute
   '/dashboard/attendance': typeof DashboardAttendanceRoute
   '/dashboard/community': typeof DashboardCommunityRoute
   '/dashboard/events': typeof DashboardEventsRoute
@@ -168,12 +211,14 @@ export interface FileRoutesById {
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
   '/dashboard/work': typeof DashboardWorkRoute
+  '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/auth'
     | '/contact'
     | '/dashboard'
@@ -182,6 +227,9 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/admin/events'
+    | '/admin/inbox'
+    | '/admin/members'
     | '/dashboard/attendance'
     | '/dashboard/community'
     | '/dashboard/events'
@@ -189,6 +237,7 @@ export interface FileRouteTypes {
     | '/dashboard/profile'
     | '/dashboard/security'
     | '/dashboard/work'
+    | '/admin/'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -200,6 +249,9 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/admin/events'
+    | '/admin/inbox'
+    | '/admin/members'
     | '/dashboard/attendance'
     | '/dashboard/community'
     | '/dashboard/events'
@@ -207,10 +259,12 @@ export interface FileRouteTypes {
     | '/dashboard/profile'
     | '/dashboard/security'
     | '/dashboard/work'
+    | '/admin'
     | '/dashboard'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/auth'
     | '/contact'
     | '/dashboard'
@@ -219,6 +273,9 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/admin/events'
+    | '/admin/inbox'
+    | '/admin/members'
     | '/dashboard/attendance'
     | '/dashboard/community'
     | '/dashboard/events'
@@ -226,11 +283,13 @@ export interface FileRouteTypes {
     | '/dashboard/profile'
     | '/dashboard/security'
     | '/dashboard/work'
+    | '/admin/'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
@@ -248,6 +307,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -305,6 +371,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/events': {
+      id: '/admin/events'
+      path: '/events'
+      fullPath: '/admin/events'
+      preLoaderRoute: typeof AdminEventsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/inbox': {
+      id: '/admin/inbox'
+      path: '/inbox'
+      fullPath: '/admin/inbox'
+      preLoaderRoute: typeof AdminInboxRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/members': {
+      id: '/admin/members'
+      path: '/members'
+      fullPath: '/admin/members'
+      preLoaderRoute: typeof AdminMembersRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/dashboard/': {
       id: '/dashboard/'
@@ -365,6 +459,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminEventsRoute: typeof AdminEventsRoute
+  AdminInboxRoute: typeof AdminInboxRoute
+  AdminMembersRoute: typeof AdminMembersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminEventsRoute: AdminEventsRoute,
+  AdminInboxRoute: AdminInboxRoute,
+  AdminMembersRoute: AdminMembersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface DashboardRouteChildren {
   DashboardAttendanceRoute: typeof DashboardAttendanceRoute
   DashboardCommunityRoute: typeof DashboardCommunityRoute
@@ -393,6 +503,7 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
