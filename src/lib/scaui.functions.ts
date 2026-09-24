@@ -49,6 +49,19 @@ export const activateAccount = createServerFn({ method: "POST" })
         error: "This account is already active. Sign in with your own password.",
       };
     }
+    if (record.approval_status === "rejected") {
+      return {
+        ok: false as const,
+        error: "Your membership application was not approved. Please contact the chapter team.",
+      };
+    }
+    if (record.approval_status !== "approved") {
+      return {
+        ok: false as const,
+        error:
+          "Your membership is still awaiting approval from the chapter team. We'll email you once you're approved.",
+      };
+    }
 
     const { data: created, error: createError } = await supabaseAdmin.auth.admin.createUser({
       email: data.email,
@@ -166,6 +179,8 @@ export const joinScaui = createServerFn({ method: "POST" })
       expectations: data.expectations ?? null,
       willing_to_volunteer: data.willing_to_volunteer ?? false,
       preferred_team: data.preferred_team ?? null,
+      approval_status: "pending",
+      source: "website",
     });
 
     if (error) return { ok: false as const, error: "Something went wrong. Please try again." };
