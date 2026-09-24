@@ -26,6 +26,10 @@ function ProfilePage() {
     level: "",
     bio: "",
     current_track: "",
+    portfolio_url: "",
+    linkedin_url: "",
+    github_url: "",
+    behance_url: "",
     birthday_visible: true,
     willing_to_volunteer: false,
   });
@@ -44,6 +48,10 @@ function ProfilePage() {
       level: profile.level ?? "",
       bio: profile.bio ?? "",
       current_track: profile.current_track ?? "",
+      portfolio_url: profile.portfolio_url ?? "",
+      linkedin_url: profile.linkedin_url ?? "",
+      github_url: profile.github_url ?? "",
+      behance_url: profile.behance_url ?? "",
       birthday_visible: profile.birthday_visible,
       willing_to_volunteer: profile.willing_to_volunteer,
     });
@@ -134,6 +142,30 @@ function ProfilePage() {
             value={form.bio}
             onChange={(e) => setForm((f) => ({ ...f, bio: e.target.value }))}
           />
+        </div>
+
+        <div className="space-y-3">
+          <Label>Where people can find your work</Label>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {([
+              ["portfolio_url", "Portfolio / website", "https://"],
+              ["linkedin_url", "LinkedIn", "https://linkedin.com/in/…"],
+              ["github_url", "GitHub", "https://github.com/…"],
+              ["behance_url", "Behance / Dribbble", "https://behance.net/…"],
+            ] as const).map(([key, label, placeholder]) => (
+              <div key={key} className="space-y-2">
+                <Label htmlFor={key} className="text-xs font-normal text-muted-foreground">
+                  {label}
+                </Label>
+                <Input
+                  id={key}
+                  placeholder={placeholder}
+                  value={form[key]}
+                  onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="space-y-3">
