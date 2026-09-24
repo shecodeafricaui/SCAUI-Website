@@ -20,6 +20,8 @@ import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as ProgrammesRouteImport } from './routes/programmes'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminEventsRouteImport } from './routes/admin/events'
+import { Route as AdminInboxRouteImport } from './routes/admin/inbox'
 import { Route as AdminMembersRouteImport } from './routes/admin/members'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardAttendanceRouteImport } from './routes/dashboard/attendance'
@@ -85,6 +87,16 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminEventsRoute = AdminEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminInboxRoute = AdminInboxRouteImport.update({
+  id: '/inbox',
+  path: '/inbox',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminMembersRoute = AdminMembersRouteImport.update({
   id: '/members',
   path: '/members',
@@ -142,6 +154,8 @@ export interface FileRoutesByFullPath {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
   '/dashboard/attendance': typeof DashboardAttendanceRoute
   '/dashboard/community': typeof DashboardCommunityRoute
@@ -162,6 +176,8 @@ export interface FileRoutesByTo {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
   '/dashboard/attendance': typeof DashboardAttendanceRoute
   '/dashboard/community': typeof DashboardCommunityRoute
@@ -185,6 +201,8 @@ export interface FileRoutesById {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
   '/dashboard/attendance': typeof DashboardAttendanceRoute
   '/dashboard/community': typeof DashboardCommunityRoute
@@ -209,6 +227,8 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/admin/events'
+    | '/admin/inbox'
     | '/admin/members'
     | '/dashboard/attendance'
     | '/dashboard/community'
@@ -229,6 +249,8 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/admin/events'
+    | '/admin/inbox'
     | '/admin/members'
     | '/dashboard/attendance'
     | '/dashboard/community'
@@ -251,6 +273,8 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/admin/events'
+    | '/admin/inbox'
     | '/admin/members'
     | '/dashboard/attendance'
     | '/dashboard/community'
@@ -355,6 +379,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/events': {
+      id: '/admin/events'
+      path: '/events'
+      fullPath: '/admin/events'
+      preLoaderRoute: typeof AdminEventsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/inbox': {
+      id: '/admin/inbox'
+      path: '/inbox'
+      fullPath: '/admin/inbox'
+      preLoaderRoute: typeof AdminInboxRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/members': {
       id: '/admin/members'
       path: '/members'
@@ -422,11 +460,15 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminEventsRoute: typeof AdminEventsRoute
+  AdminInboxRoute: typeof AdminInboxRoute
   AdminMembersRoute: typeof AdminMembersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminEventsRoute: AdminEventsRoute,
+  AdminInboxRoute: AdminInboxRoute,
   AdminMembersRoute: AdminMembersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
