@@ -21,7 +21,7 @@ export const Route = createFileRoute("/dashboard")({
   component: DashboardLayout,
 });
 
-const LINKS = [
+const LINKS: { to: string; label: string; icon: typeof Gauge; exact?: boolean }[] = [
   { to: "/dashboard", label: "Overview", icon: Gauge, exact: true },
   { to: "/dashboard/profile", label: "My profile", icon: UserRound },
   { to: "/dashboard/work", label: "My work", icon: Briefcase },
@@ -30,7 +30,7 @@ const LINKS = [
   { to: "/dashboard/community", label: "Tracks & teams", icon: Users },
   { to: "/dashboard/opportunities", label: "Saved opportunities", icon: Sparkles },
   { to: "/dashboard/security", label: "Password", icon: KeyRound },
-] as const;
+];
 
 function DashboardLayout() {
   const { user, loading, profile, isLead, signOut } = useAuth();
