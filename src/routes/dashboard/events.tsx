@@ -46,7 +46,7 @@ function MemberEventsPage() {
       toast.error("Could not register. You may already be registered.");
       return;
     }
-    toast.success(waitlisted ? "Event is full — you're on the waitlist." : "You're registered!");
+    toast.success(waitlisted ? "Event is full, you're on the waitlist." : "You're registered!");
     void qc.invalidateQueries({ queryKey: ["member-events"] });
   };
 

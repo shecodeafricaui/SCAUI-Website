@@ -12,8 +12,15 @@
     {
       "idx": 1,
       "version": "7",
-      "when": 1790124013454,
-      "tag": "0001_member_links_projects_approval",
+      "when": 1790238600000,
+      "tag": "0001_events_registration_url",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790238700000,
+      "tag": "0002_futureher_registration_url_fix",
       "breakpoints": true
     }
   ]

@@ -133,9 +133,9 @@ function Index() {
 
             <dl className="mt-12 grid max-w-md grid-cols-3 gap-6">
               {[
-                { label: "Members", value: stats?.members ?? 0 },
+                { label: "Members", value: stats?.members ?? 69 },
                 { label: "Learning tracks", value: 13 },
-                { label: "Open opportunities", value: stats?.opportunities ?? 0 },
+                { label: "Open opportunities", value: stats?.opportunities ?? 5 },
               ].map((s) => (
                 <div key={s.label}>
                   <dt className="sr-only">{s.label}</dt>
