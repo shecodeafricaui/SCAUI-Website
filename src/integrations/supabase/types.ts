@@ -239,6 +239,7 @@ export type Database = {
           id: string
           is_online: boolean
           location: string | null
+          registration_url: string | null
           resources_url: string | null
           slug: string
           starts_at: string
@@ -256,6 +257,7 @@ export type Database = {
           id?: string
           is_online?: boolean
           location?: string | null
+          registration_url?: string | null
           resources_url?: string | null
           slug: string
           starts_at: string
@@ -273,6 +275,7 @@ export type Database = {
           id?: string
           is_online?: boolean
           location?: string | null
+          registration_url?: string | null
           resources_url?: string | null
           slug?: string
           starts_at?: string
