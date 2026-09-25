@@ -50,6 +50,21 @@ function MemberEventsPage() {
     void qc.invalidateQueries({ queryKey: ["member-events"] });
   };
 
+  // External events: open the ticket page and mark the member as registered (not attended).
+  const registerExternal = async (eventId: string, url: string) => {
+    if (!user) return;
+    window.open(url, "_blank", "noopener,noreferrer");
+    const { error } = await supabase.from("event_registrations").insert({
+      event_id: eventId,
+      user_id: user.id,
+      status: "confirmed",
+    });
+    if (!error) {
+      toast.success("Marked as registered. Complete your ticket on the event site.");
+      void qc.invalidateQueries({ queryKey: ["member-events"] });
+    }
+  };
+
   const cancel = async (id: string) => {
     await supabase.from("event_registrations").delete().eq("id", id);
     toast.success("Registration cancelled.");
@@ -110,6 +125,10 @@ function MemberEventsPage() {
                       Cancel registration
                     </Button>
                   </div>
+                ) : e.registration_url ? (
+                  <Button size="sm" className="mt-5 w-full" onClick={() => registerExternal(e.id, e.registration_url!)}>
+                    Register on the event site
+                  </Button>
                 ) : (
                   <Button size="sm" className="mt-5 w-full" onClick={() => register(e.id, e.capacity)}>
                     Register
