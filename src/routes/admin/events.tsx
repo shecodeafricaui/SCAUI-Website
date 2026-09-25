@@ -22,6 +22,7 @@ const EMPTY = {
   location: "",
   starts_at: "",
   capacity: "",
+  registration_url: "",
 };
 
 function AdminEvents() {
@@ -60,6 +61,7 @@ function AdminEvents() {
       description: form.description || null,
       category: form.category,
       location: form.location || null,
+      registration_url: form.registration_url || null,
       is_online: false,
       starts_at: new Date(form.starts_at).toISOString(),
       capacity: form.capacity ? Number(form.capacity) : null,
@@ -171,6 +173,11 @@ function AdminEvents() {
             <Label htmlFor="location">Venue</Label>
             <Input id="location" value={form.location}
               onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))} />
+          </div>
+          <div className="space-y-2 sm:col-span-2">
+            <Label htmlFor="registration_url">External registration link (optional)</Label>
+            <Input id="registration_url" type="url" placeholder="https://…" value={form.registration_url}
+              onChange={(e) => setForm((f) => ({ ...f, registration_url: e.target.value }))} />
           </div>
         </div>
         <div className="space-y-2">

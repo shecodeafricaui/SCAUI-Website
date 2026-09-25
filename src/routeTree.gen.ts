@@ -20,6 +20,7 @@ import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as ProgrammesRouteImport } from './routes/programmes'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminContentRouteImport } from './routes/admin/content'
 import { Route as AdminEventsRouteImport } from './routes/admin/events'
 import { Route as AdminInboxRouteImport } from './routes/admin/inbox'
 import { Route as AdminMembersRouteImport } from './routes/admin/members'
@@ -85,6 +86,11 @@ const ProjectsRoute = ProjectsRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminContentRoute = AdminContentRouteImport.update({
+  id: '/content',
+  path: '/content',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminEventsRoute = AdminEventsRouteImport.update({
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/admin/content': typeof AdminContentRoute
   '/admin/events': typeof AdminEventsRoute
   '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
@@ -176,6 +183,7 @@ export interface FileRoutesByTo {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/admin/content': typeof AdminContentRoute
   '/admin/events': typeof AdminEventsRoute
   '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
@@ -201,6 +209,7 @@ export interface FileRoutesById {
   '/opportunities': typeof OpportunitiesRoute
   '/programmes': typeof ProgrammesRoute
   '/projects': typeof ProjectsRoute
+  '/admin/content': typeof AdminContentRoute
   '/admin/events': typeof AdminEventsRoute
   '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
@@ -227,6 +236,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/admin/content'
     | '/admin/events'
     | '/admin/inbox'
     | '/admin/members'
@@ -249,6 +259,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/admin/content'
     | '/admin/events'
     | '/admin/inbox'
     | '/admin/members'
@@ -273,6 +284,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/programmes'
     | '/projects'
+    | '/admin/content'
     | '/admin/events'
     | '/admin/inbox'
     | '/admin/members'
@@ -379,6 +391,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/content': {
+      id: '/admin/content'
+      path: '/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AdminContentRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/events': {
       id: '/admin/events'
       path: '/events'
@@ -460,6 +479,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminContentRoute: typeof AdminContentRoute
   AdminEventsRoute: typeof AdminEventsRoute
   AdminInboxRoute: typeof AdminInboxRoute
   AdminMembersRoute: typeof AdminMembersRoute
@@ -467,6 +487,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminContentRoute: AdminContentRoute,
   AdminEventsRoute: AdminEventsRoute,
   AdminInboxRoute: AdminInboxRoute,
   AdminMembersRoute: AdminMembersRoute,
