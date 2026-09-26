@@ -32,7 +32,7 @@ function AdminContent() {
 
   const saveLink = async (id: string, value: string) => {
     const { error } = await supabase.from("teams").update({ whatsapp_url: value || null }).eq("id", id);
-    if (error) return toast.error("Could not save that link.");
+    if (error) { toast.error("Could not save that link."); return; }
     toast.success("WhatsApp link saved.");
     void refresh();
   };
@@ -42,7 +42,7 @@ function AdminContent() {
     const { error } = await supabase
       .from("announcements")
       .insert({ title, body: body || null, audience: "public", status: "published" });
-    if (error) return toast.error("Could not post announcement.");
+    if (error) { toast.error("Could not post announcement."); return; }
     setTitle("");
     setBody("");
     void refresh();
