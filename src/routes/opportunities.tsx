@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { ExternalLink } from "lucide-react";
@@ -65,6 +65,11 @@ function OpportunitiesPage() {
       />
 
       <div className="mx-auto max-w-6xl px-5 py-16">
+        <Link to="/scholarships/datacamp" className="mb-8 block rounded-2xl border border-primary bg-card p-6 hover:bg-secondary/50">
+          <Badge>New scholarship</Badge>
+          <h3 className="mt-3 font-display text-lg font-bold">50 free DataCamp licences for members</h3>
+          <p className="mt-1 text-sm text-muted-foreground">See the courses and apply →</p>
+        </Link>
         <div className="flex flex-wrap gap-3">
           <Input
             placeholder="Search opportunities…"
