@@ -32,6 +32,7 @@ import { Route as DashboardOpportunitiesRouteImport } from './routes/dashboard/o
 import { Route as DashboardProfileRouteImport } from './routes/dashboard/profile'
 import { Route as DashboardSecurityRouteImport } from './routes/dashboard/security'
 import { Route as DashboardWorkRouteImport } from './routes/dashboard/work'
+import { Route as ScholarshipsDatacampRouteImport } from './routes/scholarships.datacamp'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -148,6 +149,11 @@ const DashboardWorkRoute = DashboardWorkRouteImport.update({
   path: '/work',
   getParentRoute: () => DashboardRoute,
 } as any)
+const ScholarshipsDatacampRoute = ScholarshipsDatacampRouteImport.update({
+  id: '/scholarships/datacamp',
+  path: '/scholarships/datacamp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
   '/dashboard/work': typeof DashboardWorkRoute
+  '/scholarships/datacamp': typeof ScholarshipsDatacampRoute
   '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -194,6 +201,7 @@ export interface FileRoutesByTo {
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
   '/dashboard/work': typeof DashboardWorkRoute
+  '/scholarships/datacamp': typeof ScholarshipsDatacampRoute
   '/admin': typeof AdminIndexRoute
   '/dashboard': typeof DashboardIndexRoute
 }
@@ -220,6 +228,7 @@ export interface FileRoutesById {
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
   '/dashboard/work': typeof DashboardWorkRoute
+  '/scholarships/datacamp': typeof ScholarshipsDatacampRoute
   '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -247,6 +256,7 @@ export interface FileRouteTypes {
     | '/dashboard/profile'
     | '/dashboard/security'
     | '/dashboard/work'
+    | '/scholarships/datacamp'
     | '/admin/'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
@@ -270,6 +280,7 @@ export interface FileRouteTypes {
     | '/dashboard/profile'
     | '/dashboard/security'
     | '/dashboard/work'
+    | '/scholarships/datacamp'
     | '/admin'
     | '/dashboard'
   id:
@@ -295,6 +306,7 @@ export interface FileRouteTypes {
     | '/dashboard/profile'
     | '/dashboard/security'
     | '/dashboard/work'
+    | '/scholarships/datacamp'
     | '/admin/'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
@@ -310,6 +322,7 @@ export interface RootRouteChildren {
   OpportunitiesRoute: typeof OpportunitiesRoute
   ProgrammesRoute: typeof ProgrammesRoute
   ProjectsRoute: typeof ProjectsRoute
+  ScholarshipsDatacampRoute: typeof ScholarshipsDatacampRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -475,6 +488,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardWorkRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/scholarships/datacamp': {
+      id: '/scholarships/datacamp'
+      path: '/scholarships/datacamp'
+      fullPath: '/scholarships/datacamp'
+      preLoaderRoute: typeof ScholarshipsDatacampRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -533,6 +553,7 @@ const rootRouteChildren: RootRouteChildren = {
   OpportunitiesRoute: OpportunitiesRoute,
   ProgrammesRoute: ProgrammesRoute,
   ProjectsRoute: ProjectsRoute,
+  ScholarshipsDatacampRoute: ScholarshipsDatacampRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
