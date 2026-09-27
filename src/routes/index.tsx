@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import heroImage from "@/assets/hero-community.jpg";
 import { PublicLayout } from "@/components/public-layout";
+import { MemberShowcase } from "@/components/member-showcase";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
@@ -326,6 +327,8 @@ function Index() {
           </div>
         </section>
       )}
+
+      <MemberShowcase />
 
       {/* MEMBER PORTAL CTA */}
       <section className="surface-ink relative overflow-hidden">
