@@ -16,6 +16,7 @@ const LINKS: { to: string; label: string; icon: typeof Users2; exact?: boolean }
   { to: "/admin/events", label: "Events & attendance", icon: CalendarCog },
   { to: "/admin/content", label: "Content", icon: Layers },
   { to: "/admin/inbox", label: "Inbox & newsletter", icon: Inbox },
+  { to: "/admin/support", label: "Complaints & mentorship", icon: Users2 },
 ];
 
 function AdminLayout() {

@@ -29,6 +29,8 @@ const LINKS: { to: string; label: string; icon: typeof Gauge; exact?: boolean }[
   { to: "/dashboard/attendance", label: "Attendance", icon: LayoutGrid },
   { to: "/dashboard/community", label: "Tracks & teams", icon: Users },
   { to: "/dashboard/opportunities", label: "Saved opportunities", icon: Sparkles },
+  { to: "/dashboard/mentorship", label: "Mentorship", icon: Users },
+  { to: "/dashboard/support", label: "Complaints", icon: ShieldCheck },
   { to: "/dashboard/security", label: "Password", icon: KeyRound },
 ];
 

@@ -23,6 +23,7 @@ const EMPTY = {
   tech: "",
   project_url: "",
   repo_url: "",
+  case_study: "",
   is_public: true,
 };
 
@@ -61,6 +62,7 @@ function MyWorkPage() {
       project_url: form.project_url.trim() || null,
       repo_url: form.repo_url.trim() || null,
       is_public: form.is_public,
+      case_study: form.case_study.trim() || null,
     });
     setBusy(false);
     if (error) {
@@ -125,6 +127,18 @@ function MyWorkPage() {
               onChange={(e) => setForm((f) => ({ ...f, repo_url: e.target.value }))}
             />
           </div>
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="case_study">Case study (the problem, your process, the result)</Label>
+          <Textarea
+            id="case_study"
+            rows={5}
+            value={form.case_study}
+            onChange={(e) => setForm((f) => ({ ...f, case_study: e.target.value }))}
+          />
+          <p className="text-xs text-muted-foreground">
+            Public projects appear in the member showcase on the home page.
+          </p>
         </div>
         <div className="space-y-2">
           <Label htmlFor="tech">Tools used (comma separated)</Label>

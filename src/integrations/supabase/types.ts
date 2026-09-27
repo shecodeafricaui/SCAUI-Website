@@ -284,8 +284,45 @@ export type Database = {
         }
         Relationships: []
       }
+      grievances: {
+        Row: {
+          admin_note: string | null
+          anonymous: boolean
+          category: string
+          created_at: string
+          id: string
+          message: string
+          status: string
+          subject: string
+          user_id: string
+        }
+        Insert: {
+          admin_note?: string | null
+          anonymous?: boolean
+          category?: string
+          created_at?: string
+          id?: string
+          message: string
+          status?: string
+          subject: string
+          user_id: string
+        }
+        Update: {
+          admin_note?: string | null
+          anonymous?: boolean
+          category?: string
+          created_at?: string
+          id?: string
+          message?: string
+          status?: string
+          subject?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       member_projects: {
         Row: {
+          case_study: string | null
           created_at: string
           description: string | null
           id: string
@@ -299,6 +336,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          case_study?: string | null
           created_at?: string
           description?: string | null
           id?: string
@@ -312,6 +350,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          case_study?: string | null
           created_at?: string
           description?: string | null
           id?: string
@@ -395,6 +434,42 @@ export type Database = {
           reviewed_by?: string | null
           source?: string
           willing_to_volunteer?: boolean
+        }
+        Relationships: []
+      }
+      mentorship_applications: {
+        Row: {
+          areas: string[]
+          availability: string | null
+          created_at: string
+          experience: string | null
+          goals: string | null
+          id: string
+          role: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          areas?: string[]
+          availability?: string | null
+          created_at?: string
+          experience?: string | null
+          goals?: string | null
+          id?: string
+          role?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          areas?: string[]
+          availability?: string | null
+          created_at?: string
+          experience?: string | null
+          goals?: string | null
+          id?: string
+          role?: string
+          status?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -1146,6 +1221,26 @@ export type Database = {
       }
       is_lead: { Args: { _user_id: string }; Returns: boolean }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
+      public_showcase: {
+        Args: { _limit?: number }
+        Returns: {
+          behance_url: string
+          case_study: string
+          created_at: string
+          description: string
+          github_url: string
+          id: string
+          image_url: string
+          linkedin_url: string
+          member_name: string
+          portfolio_url: string
+          project_url: string
+          repo_url: string
+          role: string
+          tech_stack: string[]
+          title: string
+        }[]
+      }
     }
     Enums: {
       app_role: "super_admin" | "admin" | "team_lead" | "member"
