@@ -20,7 +20,7 @@ const CATEGORIES = ["General", "Event", "Team or volunteering", "Conduct", "Plat
 function SupportPage() {
   const { user } = useAuth();
   const qc = useQueryClient();
-  const [category, setCategory] = useState(CATEGORIES[0]);
+  const [category, setCategory] = useState<string>("General");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [anonymous, setAnonymous] = useState(false);
