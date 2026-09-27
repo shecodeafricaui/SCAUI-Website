@@ -24,13 +24,16 @@ import { Route as AdminContentRouteImport } from './routes/admin/content'
 import { Route as AdminEventsRouteImport } from './routes/admin/events'
 import { Route as AdminInboxRouteImport } from './routes/admin/inbox'
 import { Route as AdminMembersRouteImport } from './routes/admin/members'
+import { Route as AdminSupportRouteImport } from './routes/admin/support'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardAttendanceRouteImport } from './routes/dashboard/attendance'
 import { Route as DashboardCommunityRouteImport } from './routes/dashboard/community'
 import { Route as DashboardEventsRouteImport } from './routes/dashboard/events'
+import { Route as DashboardMentorshipRouteImport } from './routes/dashboard/mentorship'
 import { Route as DashboardOpportunitiesRouteImport } from './routes/dashboard/opportunities'
 import { Route as DashboardProfileRouteImport } from './routes/dashboard/profile'
 import { Route as DashboardSecurityRouteImport } from './routes/dashboard/security'
+import { Route as DashboardSupportRouteImport } from './routes/dashboard/support'
 import { Route as DashboardWorkRouteImport } from './routes/dashboard/work'
 import { Route as ScholarshipsDatacampRouteImport } from './routes/scholarships.datacamp'
 
@@ -109,6 +112,11 @@ const AdminMembersRoute = AdminMembersRouteImport.update({
   path: '/members',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminSupportRoute = AdminSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => AdminRoute,
+} as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -129,6 +137,11 @@ const DashboardEventsRoute = DashboardEventsRouteImport.update({
   path: '/events',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardMentorshipRoute = DashboardMentorshipRouteImport.update({
+  id: '/mentorship',
+  path: '/mentorship',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardOpportunitiesRoute = DashboardOpportunitiesRouteImport.update({
   id: '/opportunities',
   path: '/opportunities',
@@ -142,6 +155,11 @@ const DashboardProfileRoute = DashboardProfileRouteImport.update({
 const DashboardSecurityRoute = DashboardSecurityRouteImport.update({
   id: '/security',
   path: '/security',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSupportRoute = DashboardSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardWorkRoute = DashboardWorkRouteImport.update({
@@ -170,12 +188,15 @@ export interface FileRoutesByFullPath {
   '/admin/events': typeof AdminEventsRoute
   '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/support': typeof AdminSupportRoute
   '/dashboard/attendance': typeof DashboardAttendanceRoute
   '/dashboard/community': typeof DashboardCommunityRoute
   '/dashboard/events': typeof DashboardEventsRoute
+  '/dashboard/mentorship': typeof DashboardMentorshipRoute
   '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/support': typeof DashboardSupportRoute
   '/dashboard/work': typeof DashboardWorkRoute
   '/scholarships/datacamp': typeof ScholarshipsDatacampRoute
   '/admin/': typeof AdminIndexRoute
@@ -194,12 +215,15 @@ export interface FileRoutesByTo {
   '/admin/events': typeof AdminEventsRoute
   '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/support': typeof AdminSupportRoute
   '/dashboard/attendance': typeof DashboardAttendanceRoute
   '/dashboard/community': typeof DashboardCommunityRoute
   '/dashboard/events': typeof DashboardEventsRoute
+  '/dashboard/mentorship': typeof DashboardMentorshipRoute
   '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/support': typeof DashboardSupportRoute
   '/dashboard/work': typeof DashboardWorkRoute
   '/scholarships/datacamp': typeof ScholarshipsDatacampRoute
   '/admin': typeof AdminIndexRoute
@@ -221,12 +245,15 @@ export interface FileRoutesById {
   '/admin/events': typeof AdminEventsRoute
   '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/support': typeof AdminSupportRoute
   '/dashboard/attendance': typeof DashboardAttendanceRoute
   '/dashboard/community': typeof DashboardCommunityRoute
   '/dashboard/events': typeof DashboardEventsRoute
+  '/dashboard/mentorship': typeof DashboardMentorshipRoute
   '/dashboard/opportunities': typeof DashboardOpportunitiesRoute
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/support': typeof DashboardSupportRoute
   '/dashboard/work': typeof DashboardWorkRoute
   '/scholarships/datacamp': typeof ScholarshipsDatacampRoute
   '/admin/': typeof AdminIndexRoute
@@ -249,12 +276,15 @@ export interface FileRouteTypes {
     | '/admin/events'
     | '/admin/inbox'
     | '/admin/members'
+    | '/admin/support'
     | '/dashboard/attendance'
     | '/dashboard/community'
     | '/dashboard/events'
+    | '/dashboard/mentorship'
     | '/dashboard/opportunities'
     | '/dashboard/profile'
     | '/dashboard/security'
+    | '/dashboard/support'
     | '/dashboard/work'
     | '/scholarships/datacamp'
     | '/admin/'
@@ -273,12 +303,15 @@ export interface FileRouteTypes {
     | '/admin/events'
     | '/admin/inbox'
     | '/admin/members'
+    | '/admin/support'
     | '/dashboard/attendance'
     | '/dashboard/community'
     | '/dashboard/events'
+    | '/dashboard/mentorship'
     | '/dashboard/opportunities'
     | '/dashboard/profile'
     | '/dashboard/security'
+    | '/dashboard/support'
     | '/dashboard/work'
     | '/scholarships/datacamp'
     | '/admin'
@@ -299,12 +332,15 @@ export interface FileRouteTypes {
     | '/admin/events'
     | '/admin/inbox'
     | '/admin/members'
+    | '/admin/support'
     | '/dashboard/attendance'
     | '/dashboard/community'
     | '/dashboard/events'
+    | '/dashboard/mentorship'
     | '/dashboard/opportunities'
     | '/dashboard/profile'
     | '/dashboard/security'
+    | '/dashboard/support'
     | '/dashboard/work'
     | '/scholarships/datacamp'
     | '/admin/'
@@ -432,6 +468,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMembersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/support': {
+      id: '/admin/support'
+      path: '/support'
+      fullPath: '/admin/support'
+      preLoaderRoute: typeof AdminSupportRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/'
@@ -460,6 +503,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardEventsRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/mentorship': {
+      id: '/dashboard/mentorship'
+      path: '/mentorship'
+      fullPath: '/dashboard/mentorship'
+      preLoaderRoute: typeof DashboardMentorshipRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/opportunities': {
       id: '/dashboard/opportunities'
       path: '/opportunities'
@@ -479,6 +529,13 @@ declare module '@tanstack/react-router' {
       path: '/security'
       fullPath: '/dashboard/security'
       preLoaderRoute: typeof DashboardSecurityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/support': {
+      id: '/dashboard/support'
+      path: '/support'
+      fullPath: '/dashboard/support'
+      preLoaderRoute: typeof DashboardSupportRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/work': {
@@ -503,6 +560,7 @@ interface AdminRouteChildren {
   AdminEventsRoute: typeof AdminEventsRoute
   AdminInboxRoute: typeof AdminInboxRoute
   AdminMembersRoute: typeof AdminMembersRoute
+  AdminSupportRoute: typeof AdminSupportRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
@@ -511,6 +569,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminEventsRoute: AdminEventsRoute,
   AdminInboxRoute: AdminInboxRoute,
   AdminMembersRoute: AdminMembersRoute,
+  AdminSupportRoute: AdminSupportRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
@@ -520,9 +579,11 @@ interface DashboardRouteChildren {
   DashboardAttendanceRoute: typeof DashboardAttendanceRoute
   DashboardCommunityRoute: typeof DashboardCommunityRoute
   DashboardEventsRoute: typeof DashboardEventsRoute
+  DashboardMentorshipRoute: typeof DashboardMentorshipRoute
   DashboardOpportunitiesRoute: typeof DashboardOpportunitiesRoute
   DashboardProfileRoute: typeof DashboardProfileRoute
   DashboardSecurityRoute: typeof DashboardSecurityRoute
+  DashboardSupportRoute: typeof DashboardSupportRoute
   DashboardWorkRoute: typeof DashboardWorkRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
@@ -531,9 +592,11 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardAttendanceRoute: DashboardAttendanceRoute,
   DashboardCommunityRoute: DashboardCommunityRoute,
   DashboardEventsRoute: DashboardEventsRoute,
+  DashboardMentorshipRoute: DashboardMentorshipRoute,
   DashboardOpportunitiesRoute: DashboardOpportunitiesRoute,
   DashboardProfileRoute: DashboardProfileRoute,
   DashboardSecurityRoute: DashboardSecurityRoute,
+  DashboardSupportRoute: DashboardSupportRoute,
   DashboardWorkRoute: DashboardWorkRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
