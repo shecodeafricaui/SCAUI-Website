@@ -101,9 +101,15 @@ export const activateAccount = createServerFn({ method: "POST" })
       .select("id", { count: "exact", head: true })
       .eq("role", "super_admin");
 
-    const role = (count ?? 0) === 0 ? "super_admin" : "member";
+    const desired = (record as { desired_role?: string | null }).desired_role;
+    const role =
+      (count ?? 0) === 0
+        ? "super_admin"
+        : desired === "admin" || desired === "team_lead"
+          ? desired
+          : "member";
     await supabaseAdmin.from("user_roles").insert({ user_id: userId, role });
-    if (role === "super_admin") {
+    if (role !== "member") {
       await supabaseAdmin.from("user_roles").insert({ user_id: userId, role: "member" });
     }
 
