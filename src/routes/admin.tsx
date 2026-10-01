@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { BarChart3, CalendarCog, Inbox, Layers, Users2, ArrowLeft } from "lucide-react";
+import { BarChart3, CalendarCog, Inbox, Layers, Users2, ArrowLeft, UserCheck } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/brand-mark";
@@ -13,6 +13,7 @@ export const Route = createFileRoute("/admin")({
 const LINKS: { to: string; label: string; icon: typeof Users2; exact?: boolean }[] = [
   { to: "/admin", label: "Overview", icon: BarChart3, exact: true },
   { to: "/admin/members", label: "Members & approvals", icon: Users2 },
+  { to: "/admin/activation", label: "Onboarding tracker", icon: UserCheck },
   { to: "/admin/events", label: "Events & attendance", icon: CalendarCog },
   { to: "/admin/content", label: "Content", icon: Layers },
   { to: "/admin/inbox", label: "Inbox & newsletter", icon: Inbox },
