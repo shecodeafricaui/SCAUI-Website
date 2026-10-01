@@ -1,0 +1,2 @@
+ALTER TABLE public.member_records ADD COLUMN desired_role text;
+COMMENT ON COLUMN public.member_records.desired_role IS 'Role to grant on account activation (e.g. team_lead, admin) for excos; NULL = member.';
