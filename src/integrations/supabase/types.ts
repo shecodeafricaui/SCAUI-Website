@@ -374,6 +374,7 @@ export type Database = {
           created_at: string
           current_track: string | null
           department: string | null
+          desired_role: string | null
           email: string
           expectations: string | null
           faculty: string | null
@@ -397,6 +398,7 @@ export type Database = {
           created_at?: string
           current_track?: string | null
           department?: string | null
+          desired_role?: string | null
           email: string
           expectations?: string | null
           faculty?: string | null
@@ -420,6 +422,7 @@ export type Database = {
           created_at?: string
           current_track?: string | null
           department?: string | null
+          desired_role?: string | null
           email?: string
           expectations?: string | null
           faculty?: string | null
