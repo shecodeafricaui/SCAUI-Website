@@ -331,3 +331,54 @@ export const listMemberRecords = createServerFn({ method: "GET" })
 
     return { ok: true as const, records: data ?? [] };
   });
+
+export interface ActivationRow {
+  record_id: string;
+  full_name: string;
+  email: string;
+  desired_role: string | null;
+  approval_status: string;
+  claimed: boolean;
+  claimed_at: string | null;
+  must_change_password: boolean | null;
+  profile_completed: boolean;
+}
+
+/** Admin view: has each roster member signed in and changed their first password? */
+export const listActivationStatus = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data: isStaff } = await context.supabase.rpc("is_staff", { _user_id: context.userId });
+    if (!isStaff) return { ok: false as const, rows: [] as ActivationRow[] };
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const [{ data: records }, { data: profiles }] = await Promise.all([
+      supabaseAdmin
+        .from("member_records")
+        .select("id, full_name, email, desired_role, approval_status, claimed, claimed_at")
+        .order("full_name"),
+      supabaseAdmin
+        .from("profiles")
+        .select("email, must_change_password, phone, faculty, department, level"),
+    ]);
+
+    const byEmail = new Map((profiles ?? []).map((p) => [p.email.toLowerCase(), p]));
+
+    const rows: ActivationRow[] = (records ?? []).map((r) => {
+      const p = byEmail.get(r.email.toLowerCase());
+      return {
+        record_id: r.id,
+        full_name: r.full_name,
+        email: r.email,
+        desired_role: r.desired_role,
+        approval_status: r.approval_status,
+        claimed: r.claimed,
+        claimed_at: r.claimed_at,
+        must_change_password: p ? p.must_change_password : null,
+        profile_completed: Boolean(p && p.phone && p.faculty && p.department && p.level),
+      };
+    });
+
+    return { ok: true as const, rows };
+  });
