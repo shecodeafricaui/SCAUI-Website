@@ -31,6 +31,7 @@ function AdminEvents() {
   const [form, setForm] = useState(EMPTY);
   const [selected, setSelected] = useState<string | null>(null);
   const [code, setCode] = useState("");
+  const [search, setSearch] = useState("");
 
   const { data } = useQuery({
     queryKey: ["admin-events"],
@@ -222,17 +223,58 @@ function AdminEvents() {
 
               {open && (
                 <div className="mt-6 space-y-4 border-t border-border pt-5">
-                  <div className="flex flex-wrap gap-2">
+                  <div className="space-y-2">
+                    <Label htmlFor={`search-${e.id}`}>Find a member by name or email</Label>
                     <Input
-                      className="max-w-xs"
-                      placeholder="Scan or type the member's check-in code"
-                      value={code}
-                      onChange={(ev) => setCode(ev.target.value)}
+                      id={`search-${e.id}`}
+                      className="max-w-md"
+                      placeholder="Start typing a name, e.g. Esther"
+                      value={search}
+                      onChange={(ev) => setSearch(ev.target.value)}
                     />
-                    <Button size="sm" onClick={() => checkInByCode(e.id, e.title)}>
-                      Check in
-                    </Button>
+                    {search.trim().length >= 2 && (
+                      <ul className="max-w-md space-y-1.5">
+                        {(data?.profiles ?? [])
+                          .filter((p) =>
+                            `${p.full_name} ${p.email}`.toLowerCase().includes(search.trim().toLowerCase()),
+                          )
+                          .slice(0, 8)
+                          .map((p) => {
+                            const here = present.some((a) => a.user_id === p.id);
+                            return (
+                              <li key={p.id} className="flex items-center justify-between gap-3 rounded-lg border border-border px-3 py-2 text-sm">
+                                <span>
+                                  {p.full_name}
+                                  <span className="ml-2 text-muted-foreground">{p.email}</span>
+                                </span>
+                                {here ? (
+                                  <Badge>Present</Badge>
+                                ) : (
+                                  <Button size="sm" variant="outline" onClick={() => markPresent(e.id, e.title, p.id, "manual")}>
+                                    Mark present
+                                  </Button>
+                                )}
+                              </li>
+                            );
+                          })}
+                      </ul>
+                    )}
                   </div>
+
+                  <details className="text-sm">
+                    <summary className="cursor-pointer text-muted-foreground">Check in with a code instead</summary>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      <Input
+                        className="max-w-xs"
+                        placeholder="Member's check-in code"
+                        value={code}
+                        onChange={(ev) => setCode(ev.target.value)}
+                      />
+                      <Button size="sm" onClick={() => checkInByCode(e.id, e.title)}>
+                        Check in
+                      </Button>
+                    </div>
+                  </details>
 
                   {regs.length === 0 ? (
                     <p className="text-sm text-muted-foreground">Nobody has registered yet.</p>

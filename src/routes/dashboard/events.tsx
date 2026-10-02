@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { CalendarDays, MapPin, QrCode } from "lucide-react";
+import { CalendarDays, CalendarPlus, MapPin, QrCode } from "lucide-react";
+import { downloadCalendarInvite } from "@/lib/calendar";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { Badge } from "@/components/ui/badge";
@@ -134,6 +135,9 @@ function MemberEventsPage() {
                     Register
                   </Button>
                 )}
+                <Button variant="ghost" size="sm" className="mt-2 w-full" onClick={() => downloadCalendarInvite(e)}>
+                  <CalendarPlus className="mr-2 h-4 w-4" /> Add to my calendar
+                </Button>
               </article>
             );
           })}

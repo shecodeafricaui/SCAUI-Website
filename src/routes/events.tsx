@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { CalendarDays, MapPin, Users } from "lucide-react";
+import { CalendarDays, CalendarPlus, MapPin, Users } from "lucide-react";
+import { downloadCalendarInvite } from "@/lib/calendar";
 import { PublicLayout, PageHero } from "@/components/public-layout";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -63,6 +64,8 @@ interface EventRow {
   is_online: boolean;
   starts_at: string;
   capacity: number | null;
+  ends_at?: string | null;
+  registration_url?: string | null;
 }
 
 function Section({
@@ -114,9 +117,14 @@ function Section({
                 )}
               </dl>
               {!muted && (
-                <Button asChild size="sm" className="mt-5 w-full">
-                  <Link to="/dashboard/events">Register</Link>
-                </Button>
+                <>
+                  <Button asChild size="sm" className="mt-5 w-full">
+                    <Link to="/dashboard/events">Register</Link>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="mt-2 w-full" onClick={() => downloadCalendarInvite(e)}>
+                    <CalendarPlus className="mr-2 h-4 w-4" /> Add to my calendar
+                  </Button>
+                </>
               )}
             </article>
           ))}
