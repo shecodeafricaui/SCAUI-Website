@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { BarChart3, CalendarCog, Inbox, Layers, Users2, ArrowLeft, UserCheck } from "lucide-react";
+import { BarChart3, CalendarCog, Inbox, Layers, Users2, ArrowLeft, UserCheck, GraduationCap } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/brand-mark";
@@ -18,6 +18,7 @@ const LINKS: { to: string; label: string; icon: typeof Users2; exact?: boolean }
   { to: "/admin/content", label: "Content", icon: Layers },
   { to: "/admin/inbox", label: "Inbox & newsletter", icon: Inbox },
   { to: "/admin/support", label: "Complaints & mentorship", icon: Users2 },
+  { to: "/admin/datacamp", label: "DataCamp scholarship", icon: GraduationCap },
 ];
 
 function AdminLayout() {
