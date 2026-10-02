@@ -22,6 +22,7 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminActivationRouteImport } from './routes/admin/activation'
 import { Route as AdminContentRouteImport } from './routes/admin/content'
+import { Route as AdminDatacampRouteImport } from './routes/admin/datacamp'
 import { Route as AdminEventsRouteImport } from './routes/admin/events'
 import { Route as AdminInboxRouteImport } from './routes/admin/inbox'
 import { Route as AdminMembersRouteImport } from './routes/admin/members'
@@ -101,6 +102,11 @@ const AdminActivationRoute = AdminActivationRouteImport.update({
 const AdminContentRoute = AdminContentRouteImport.update({
   id: '/content',
   path: '/content',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDatacampRoute = AdminDatacampRouteImport.update({
+  id: '/datacamp',
+  path: '/datacamp',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminEventsRoute = AdminEventsRouteImport.update({
@@ -192,6 +198,7 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/admin/activation': typeof AdminActivationRoute
   '/admin/content': typeof AdminContentRoute
+  '/admin/datacamp': typeof AdminDatacampRoute
   '/admin/events': typeof AdminEventsRoute
   '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
@@ -220,6 +227,7 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/admin/activation': typeof AdminActivationRoute
   '/admin/content': typeof AdminContentRoute
+  '/admin/datacamp': typeof AdminDatacampRoute
   '/admin/events': typeof AdminEventsRoute
   '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
@@ -251,6 +259,7 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/admin/activation': typeof AdminActivationRoute
   '/admin/content': typeof AdminContentRoute
+  '/admin/datacamp': typeof AdminDatacampRoute
   '/admin/events': typeof AdminEventsRoute
   '/admin/inbox': typeof AdminInboxRoute
   '/admin/members': typeof AdminMembersRoute
@@ -283,6 +292,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/admin/activation'
     | '/admin/content'
+    | '/admin/datacamp'
     | '/admin/events'
     | '/admin/inbox'
     | '/admin/members'
@@ -311,6 +321,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/admin/activation'
     | '/admin/content'
+    | '/admin/datacamp'
     | '/admin/events'
     | '/admin/inbox'
     | '/admin/members'
@@ -341,6 +352,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/admin/activation'
     | '/admin/content'
+    | '/admin/datacamp'
     | '/admin/events'
     | '/admin/inbox'
     | '/admin/members'
@@ -466,6 +478,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminContentRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/datacamp': {
+      id: '/admin/datacamp'
+      path: '/datacamp'
+      fullPath: '/admin/datacamp'
+      preLoaderRoute: typeof AdminDatacampRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/events': {
       id: '/admin/events'
       path: '/events'
@@ -577,6 +596,7 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminActivationRoute: typeof AdminActivationRoute
   AdminContentRoute: typeof AdminContentRoute
+  AdminDatacampRoute: typeof AdminDatacampRoute
   AdminEventsRoute: typeof AdminEventsRoute
   AdminInboxRoute: typeof AdminInboxRoute
   AdminMembersRoute: typeof AdminMembersRoute
@@ -587,6 +607,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminActivationRoute: AdminActivationRoute,
   AdminContentRoute: AdminContentRoute,
+  AdminDatacampRoute: AdminDatacampRoute,
   AdminEventsRoute: AdminEventsRoute,
   AdminInboxRoute: AdminInboxRoute,
   AdminMembersRoute: AdminMembersRoute,

@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { updateMyProfile } from "@/lib/scaui.functions";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,6 +36,7 @@ function ProfilePage() {
   });
   const [interests, setInterests] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
+  const saveProfile = useServerFn(updateMyProfile);
 
   useEffect(() => {
     if (!profile) return;
@@ -62,17 +64,9 @@ function ProfilePage() {
     e.preventDefault();
     if (!user) return;
     setBusy(true);
-    const { error } = await supabase
-      .from("profiles")
-      .update({
-        ...form,
-        birthday: form.birthday || null,
-        interests,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", user.id);
+    const res = await saveProfile({ data: { ...form, interests } }).catch(() => null);
     setBusy(false);
-    if (error) {
+    if (!res || !res.ok) {
       toast.error("We couldn't save your profile.");
       return;
     }
