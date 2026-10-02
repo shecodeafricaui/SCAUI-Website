@@ -51,7 +51,7 @@ function AdminDataCamp() {
       return;
     }
     const { error } = await supabase.from("programme_applications").update({ status }).eq("id", id);
-    if (error) return toast.error("Could not update.");
+    if (error) { toast.error("Could not update."); return; }
     toast.success(`Marked ${status}.`);
     void qc.invalidateQueries({ queryKey: ["admin-datacamp"] });
   };
