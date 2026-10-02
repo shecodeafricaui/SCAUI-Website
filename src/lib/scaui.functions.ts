@@ -382,3 +382,31 @@ export const listActivationStatus = createServerFn({ method: "GET" })
 
     return { ok: true as const, rows };
   });
+
+const PROFILE_FIELDS = [
+  "full_name", "phone", "birthday", "gender", "faculty", "department", "level", "bio",
+  "current_track", "portfolio_url", "linkedin_url", "github_url", "behance_url", "twitter_url",
+  "birthday_visible", "willing_to_volunteer", "interests",
+] as const;
+
+/** Saves the signed-in member's own profile and returns the stored row. */
+export const updateMyProfile = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: Record<string, unknown>) => data)
+  .handler(async ({ data, context }) => {
+    const patch: Record<string, unknown> = { updated_at: new Date().toISOString() };
+    for (const k of PROFILE_FIELDS) {
+      if (!(k in data)) continue;
+      const v = data[k];
+      patch[k] = typeof v === "string" ? (v.trim() === "" && k !== "full_name" ? null : v.trim()) : v;
+    }
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: row, error } = await supabaseAdmin
+      .from("profiles")
+      .update(patch as never)
+      .eq("id", context.userId)
+      .select("*")
+      .maybeSingle();
+    if (error || !row) return { ok: false as const, error: error?.message ?? "Profile not found." };
+    return { ok: true as const, profile: row };
+  });
