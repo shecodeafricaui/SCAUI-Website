@@ -20,3 +20,5 @@
 
 ## Later (V2)
 - Mentorship, sponsorship CRM, payments/donations, WhatsApp automation, automated reports, alumni
+- [x] Approvals tab: show full applicant details (phone, birthday, gender, faculty, department, level, interests, expectations, preferred team, source, date)
+- [x] joinScaui: if email already on the member list, return friendly "already a member — sign in / activate" message instead of an error
