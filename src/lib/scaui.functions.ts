@@ -225,6 +225,23 @@ export const joinScaui = createServerFn({ method: "POST" })
     return { ok: true as const };
   });
 
+/** Staff-only: short-lived signed URL to view an applicant's uploaded ID card. */
+export const getIdCardUrl = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: { path: string }) => data)
+  .handler(async ({ data, context }) => {
+    const { data: isStaff } = await context.supabase.rpc("is_staff", {
+      _user_id: context.userId,
+    });
+    if (!isStaff) return { ok: false as const, error: "Staff only." };
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: signed, error } = await supabaseAdmin.storage
+      .from("id-cards")
+      .createSignedUrl(data.path, 300);
+    if (error || !signed?.signedUrl) return { ok: false as const, error: "Could not open file." };
+    return { ok: true as const, url: signed.signedUrl };
+  });
+
 interface RoleInput {
   user_id: string;
   role: "super_admin" | "admin" | "team_lead" | "member";
