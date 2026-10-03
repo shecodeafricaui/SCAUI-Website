@@ -1,0 +1,2 @@
+ALTER TABLE public.member_records ADD COLUMN IF NOT EXISTS university text, ADD COLUMN IF NOT EXISTS id_card_url text;
+COMMENT ON COLUMN public.member_records.id_card_url IS 'Storage path of uploaded proof of studentship (school ID card) in the id-cards bucket.';

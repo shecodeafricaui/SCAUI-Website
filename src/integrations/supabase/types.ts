@@ -381,6 +381,7 @@ export type Database = {
           full_name: string
           gender: string | null
           id: string
+          id_card_url: string | null
           interests: string[]
           level: string | null
           phone: string | null
@@ -388,6 +389,7 @@ export type Database = {
           reviewed_at: string | null
           reviewed_by: string | null
           source: string
+          university: string | null
           willing_to_volunteer: boolean
         }
         Insert: {
@@ -405,6 +407,7 @@ export type Database = {
           full_name: string
           gender?: string | null
           id?: string
+          id_card_url?: string | null
           interests?: string[]
           level?: string | null
           phone?: string | null
@@ -412,6 +415,7 @@ export type Database = {
           reviewed_at?: string | null
           reviewed_by?: string | null
           source?: string
+          university?: string | null
           willing_to_volunteer?: boolean
         }
         Update: {
@@ -429,6 +433,7 @@ export type Database = {
           full_name?: string
           gender?: string | null
           id?: string
+          id_card_url?: string | null
           interests?: string[]
           level?: string | null
           phone?: string | null
@@ -436,6 +441,7 @@ export type Database = {
           reviewed_at?: string | null
           reviewed_by?: string | null
           source?: string
+          university?: string | null
           willing_to_volunteer?: boolean
         }
         Relationships: []
