@@ -26,11 +26,14 @@ export const Route = createFileRoute("/join")({
   component: JoinPage,
 });
 
+const WHATSAPP_GROUP = "https://chat.whatsapp.com/D1pUHKbhxMGFNcmI7IQ99B";
+
 function JoinPage() {
   const [done, setDone] = useState(false);
   const [already, setAlready] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [interests, setInterests] = useState<string[]>([]);
+  const [idCard, setIdCard] = useState<File | null>(null);
 
   const toggle = (t: string) =>
     setInterests((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
@@ -39,6 +42,23 @@ function JoinPage() {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     setBusy(true);
+
+    let idCardPayload: { name: string; type: string; data: string } | null = null;
+    if (idCard) {
+      if (idCard.size > 5 * 1024 * 1024) {
+        setBusy(false);
+        toast.error("ID card file must be under 5MB.");
+        return;
+      }
+      const buf = await idCard.arrayBuffer();
+      let binary = "";
+      const bytes = new Uint8Array(buf);
+      for (let i = 0; i < bytes.length; i += 8192) {
+        binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
+      }
+      idCardPayload = { name: idCard.name, type: idCard.type, data: btoa(binary) };
+    }
+
     const result = await joinScaui({
       data: {
         email: String(fd.get("email") ?? ""),
@@ -49,6 +69,8 @@ function JoinPage() {
         faculty: String(fd.get("faculty") ?? ""),
         department: String(fd.get("department") ?? ""),
         level: String(fd.get("level") ?? ""),
+        university: String(fd.get("university") ?? ""),
+        id_card: idCardPayload,
         expectations: String(fd.get("expectations") ?? ""),
         preferred_team: String(fd.get("preferred_team") ?? ""),
         willing_to_volunteer: fd.get("volunteer") === "on",
