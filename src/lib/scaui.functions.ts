@@ -139,6 +139,8 @@ interface JoinInput {
   faculty?: string;
   department?: string;
   level?: string;
+  university?: string;
+  id_card?: { name: string; type: string; data: string } | null;
   interests?: string[];
   expectations?: string;
   willing_to_volunteer?: boolean;
@@ -173,6 +175,27 @@ export const joinScaui = createServerFn({ method: "POST" })
       };
     }
 
+    // Upload proof of studentship (school ID card) if provided.
+    let idCardPath: string | null = null;
+    if (data.id_card?.data) {
+      const allowed = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
+      if (!allowed.includes(data.id_card.type)) {
+        return { ok: false as const, error: "ID card must be a JPG, PNG, WEBP or PDF file." };
+      }
+      const bytes = Buffer.from(data.id_card.data, "base64");
+      if (bytes.byteLength > 5 * 1024 * 1024) {
+        return { ok: false as const, error: "ID card file must be under 5MB." };
+      }
+      const ext = (data.id_card.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "");
+      idCardPath = `${crypto.randomUUID()}.${ext}`;
+      const { error: upErr } = await supabaseAdmin.storage
+        .from("id-cards")
+        .upload(idCardPath, bytes, { contentType: data.id_card.type });
+      if (upErr) {
+        return { ok: false as const, error: "We couldn't upload your ID card. Please try again." };
+      }
+    }
+
     const { error } = await supabaseAdmin.from("member_records").insert({
       email,
       full_name: fullName,
@@ -182,6 +205,8 @@ export const joinScaui = createServerFn({ method: "POST" })
       faculty: data.faculty ?? null,
       department: data.department ?? null,
       level: data.level ?? null,
+      university: data.university ?? null,
+      id_card_url: idCardPath,
       interests: data.interests ?? [],
       expectations: data.expectations ?? null,
       willing_to_volunteer: data.willing_to_volunteer ?? false,
@@ -198,6 +223,23 @@ export const joinScaui = createServerFn({ method: "POST" })
     );
 
     return { ok: true as const };
+  });
+
+/** Staff-only: short-lived signed URL to view an applicant's uploaded ID card. */
+export const getIdCardUrl = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: { path: string }) => data)
+  .handler(async ({ data, context }) => {
+    const { data: isStaff } = await context.supabase.rpc("is_staff", {
+      _user_id: context.userId,
+    });
+    if (!isStaff) return { ok: false as const, error: "Staff only." };
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: signed, error } = await supabaseAdmin.storage
+      .from("id-cards")
+      .createSignedUrl(data.path, 300);
+    if (error || !signed?.signedUrl) return { ok: false as const, error: "Could not open file." };
+    return { ok: true as const, url: signed.signedUrl };
   });
 
 interface RoleInput {
