@@ -28,6 +28,7 @@ export const Route = createFileRoute("/join")({
 
 function JoinPage() {
   const [done, setDone] = useState(false);
+  const [already, setAlready] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [interests, setInterests] = useState<string[]>([]);
 
@@ -56,6 +57,10 @@ function JoinPage() {
     });
     setBusy(false);
     if (!result.ok) {
+      if ("already" in result && result.already) {
+        setAlready(result.error);
+        return;
+      }
       toast.error(result.error);
       return;
     }
@@ -71,7 +76,15 @@ function JoinPage() {
       />
 
       <div className="mx-auto max-w-2xl px-5 py-16">
-        {done ? (
+        {already ? (
+          <div className="rounded-2xl border border-border bg-card p-10 text-center">
+            <h2 className="font-display text-2xl font-extrabold">You're already with us 💜</h2>
+            <p className="mt-3 text-muted-foreground">{already}</p>
+            <Button asChild className="mt-6">
+              <Link to="/auth">Sign in</Link>
+            </Button>
+          </div>
+        ) : done ? (
           <div className="rounded-2xl border border-border bg-card p-10 text-center">
             <h2 className="font-display text-2xl font-extrabold">You're on the list 🎉</h2>
             <p className="mt-3 text-muted-foreground">

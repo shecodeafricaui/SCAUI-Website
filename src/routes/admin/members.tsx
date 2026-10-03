@@ -139,17 +139,33 @@ function AdminMembers() {
             pending.map((r) => (
               <div key={r.id} className="rounded-2xl border border-border bg-card p-6">
                 <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-display text-lg font-bold">{r.full_name}</p>
                     <p className="text-sm text-muted-foreground">{r.email}</p>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      {[r.level, r.department, r.faculty].filter(Boolean).join(" · ")}
-                    </p>
-                    {r.expectations && (
-                      <p className="mt-3 max-w-xl text-sm">{r.expectations}</p>
+                    <dl className="mt-4 grid max-w-2xl gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
+                      <Detail label="Phone" value={r.phone} />
+                      <Detail label="Birthday" value={r.birthday ? formatDate(r.birthday) : null} />
+                      <Detail label="Gender" value={r.gender} />
+                      <Detail label="Level" value={r.level} />
+                      <Detail label="Faculty" value={r.faculty} />
+                      <Detail label="Department" value={r.department} />
+                      <Detail label="Preferred team" value={r.preferred_team} />
+                      <Detail label="Willing to volunteer" value={r.willing_to_volunteer ? "Yes" : "No"} />
+                    </dl>
+                    {(r.interests ?? []).length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-1.5">
+                        {r.interests.map((t) => (
+                          <Badge key={t} variant="secondary">{t}</Badge>
+                        ))}
+                      </div>
                     )}
-                    <p className="mt-2 text-xs text-muted-foreground">
-                      Applied {formatDate(r.created_at)}
+                    {r.expectations && (
+                      <p className="mt-3 max-w-xl rounded-lg bg-secondary/70 p-3 text-sm">
+                        “{r.expectations}”
+                      </p>
+                    )}
+                    <p className="mt-3 text-xs text-muted-foreground">
+                      Applied {formatDate(r.created_at)} · via {r.source === "website" ? "the website" : (r.source ?? "import")}
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -164,6 +180,15 @@ function AdminMembers() {
           )}
         </TabsContent>
       </Tabs>
+    </div>
+  );
+}
+
+function Detail({ label, value }: { label: string; value: string | null | undefined }) {
+  return (
+    <div>
+      <dt className="text-xs uppercase tracking-wide text-muted-foreground">{label}</dt>
+      <dd className="font-medium">{value ?? "—"}</dd>
     </div>
   );
 }

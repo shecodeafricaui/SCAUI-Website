@@ -166,9 +166,10 @@ export const joinScaui = createServerFn({ method: "POST" })
     if (existing) {
       return {
         ok: false as const,
+        already: true as const,
         error: existing.claimed
-          ? "You are already a member — just sign in."
-          : "You are already on the list. Activate your account with the password scaui.",
+          ? "You're already a member — please sign in instead."
+          : "You're already on the member list. Activate your account with the first-time password @scaui.",
       };
     }
 
