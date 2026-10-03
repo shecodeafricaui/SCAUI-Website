@@ -139,6 +139,8 @@ interface JoinInput {
   faculty?: string;
   department?: string;
   level?: string;
+  university?: string;
+  id_card?: { name: string; type: string; data: string } | null;
   interests?: string[];
   expectations?: string;
   willing_to_volunteer?: boolean;
