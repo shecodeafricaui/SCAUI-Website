@@ -19,6 +19,7 @@ function AdminMembers() {
   const qc = useQueryClient();
   const fetchRecords = useServerFn(listMemberRecords);
   const review = useServerFn(reviewMemberApplication);
+  const fetchIdCard = useServerFn(getIdCardUrl);
   const [q, setQ] = useState("");
 
   const { data } = useQuery({
