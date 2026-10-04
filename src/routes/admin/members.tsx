@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Download, Search } from "lucide-react";
-import { listMemberRecords, reviewMemberApplication } from "@/lib/scaui.functions";
+import { listMemberRecords, reviewMemberApplication, getIdCardUrl } from "@/lib/scaui.functions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -147,11 +147,26 @@ function AdminMembers() {
                       <Detail label="Birthday" value={r.birthday ? formatDate(r.birthday) : null} />
                       <Detail label="Gender" value={r.gender} />
                       <Detail label="Level" value={r.level} />
+                      <Detail label="University" value={r.university} />
                       <Detail label="Faculty" value={r.faculty} />
                       <Detail label="Department" value={r.department} />
                       <Detail label="Preferred team" value={r.preferred_team} />
                       <Detail label="Willing to volunteer" value={r.willing_to_volunteer ? "Yes" : "No"} />
                     </dl>
+                    {r.id_card_url && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="mt-3"
+                        onClick={async () => {
+                          const res = await fetchIdCard({ data: { path: r.id_card_url! } });
+                          if (res.ok) window.open(res.url, "_blank", "noopener");
+                          else toast.error(res.error);
+                        }}
+                      >
+                        View ID card
+                      </Button>
+                    )}
                     {(r.interests ?? []).length > 0 && (
                       <div className="mt-3 flex flex-wrap gap-1.5">
                         {r.interests.map((t) => (
