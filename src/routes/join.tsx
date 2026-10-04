@@ -94,7 +94,7 @@ function JoinPage() {
       <PageHero
         eyebrow="Membership"
         title="Join She Code Africa, UI Chapter"
-        description="Tell us a little about yourself. Once you're on the list you can activate your member page with the first-time password @scaui."
+        description="SCAUI is a community for female students of the University of Ibadan. Tell us a little about yourself and upload your school ID card so we can verify your studentship."
       />
 
       <div className="mx-auto max-w-2xl px-5 py-16">
