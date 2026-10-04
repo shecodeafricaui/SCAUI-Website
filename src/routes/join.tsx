@@ -94,7 +94,7 @@ function JoinPage() {
       <PageHero
         eyebrow="Membership"
         title="Join She Code Africa, UI Chapter"
-        description="Tell us a little about yourself. Once you're on the list you can activate your member page with the first-time password @scaui."
+        description="SCAUI is a community for female students of the University of Ibadan. Tell us a little about yourself and upload your school ID card so we can verify your studentship."
       />
 
       <div className="mx-auto max-w-2xl px-5 py-16">
@@ -110,12 +110,23 @@ function JoinPage() {
           <div className="rounded-2xl border border-border bg-card p-10 text-center">
             <h2 className="font-display text-2xl font-extrabold">You're on the list 🎉</h2>
             <p className="mt-3 text-muted-foreground">
-              Activate your member page now using your email and the first-time password{" "}
-              <strong>@scaui</strong>.
+              Once your application is approved, activate your member page using your email and the
+              first-time password <strong>@scaui</strong>.
             </p>
-            <Button asChild className="mt-6">
-              <Link to="/auth">Activate my account</Link>
-            </Button>
+            <p className="mt-3 text-muted-foreground">
+              Meanwhile, come say hello in our WhatsApp community — that's where everything happens
+              first.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Button asChild>
+                <a href={WHATSAPP_GROUP} target="_blank" rel="noreferrer">
+                  Join the WhatsApp group
+                </a>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/auth">Activate my account</Link>
+              </Button>
+            </div>
           </div>
         ) : (
           <form onSubmit={submit} className="space-y-6 rounded-2xl border border-border bg-card p-8">
@@ -126,8 +137,29 @@ function JoinPage() {
               <Field label="Birthday" name="birthday" type="date" />
               <Field label="Gender" name="gender" />
               <Field label="Level" name="level" placeholder="e.g. 300" />
+              <Field
+                label="University"
+                name="university"
+                placeholder="University of Ibadan"
+                required
+              />
               <Field label="Faculty" name="faculty" />
               <Field label="Department" name="department" />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="id_card">Proof of studentship (school ID card)</Label>
+              <Input
+                id="id_card"
+                name="id_card"
+                type="file"
+                accept="image/jpeg,image/png,image/webp,application/pdf"
+                required
+                onChange={(e) => setIdCard(e.target.files?.[0] ?? null)}
+              />
+              <p className="text-xs text-muted-foreground">
+                A clear photo or PDF of your student ID card, under 5MB. Only admins can see it.
+              </p>
             </div>
 
             <div className="space-y-3">

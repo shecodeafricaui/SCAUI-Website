@@ -110,11 +110,13 @@ function Index() {
               University of Ibadan Chapter
             </Badge>
             <h1 className="mt-5 font-display text-4xl font-black leading-[1.08] md:text-6xl">
-              Women who <span className="text-gradient-brand">learn, build</span> and belong.
+              Female UI students who <span className="text-gradient-brand">learn, build</span> and
+              belong.
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
-              SCAUI is where UI students turn curiosity about tech into skills, portfolios and
-              opportunities with a community that shows up for each other.
+              SCAUI is the She Code Africa chapter for women at the University of Ibadan — where
+              female students turn curiosity about tech into skills, portfolios and opportunities,
+              with a community that shows up for each other.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
